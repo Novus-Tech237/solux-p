@@ -27,11 +27,12 @@ const CreatePage = () => {
 const { isSubmitting, isValid } = form.formState;
 const onSubmit = async (values: solux.infer<typeof formSchema>) => {
     try{
-        const response = await axios.post("/api/course", values);
+        const response = await axios.post("/api/courses", values);
         router.push(`/teacher/courses/${response.data.id}`);
+        toast.success("Course Created Successfully")
 
     }catch{
-        toast.error("Something went wrong");
+        toast.error("Ouch... Something went wrong");
     }
 }
     return ( 
