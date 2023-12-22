@@ -9,6 +9,7 @@ import { PriceForm } from "./_components/price-form";
 import { ImageForm } from "./_components/image-form";
 import { CategoryForm } from "./_components/category-form";
 import { AttachmentForm } from "./_components/attachment-form";
+import { ChapterForm } from "./_components/chapter-form";
 
 
 const CourseIdPage = async ({params}:{params:{courseId: string}}) => {
@@ -17,8 +18,11 @@ const CourseIdPage = async ({params}:{params:{courseId: string}}) => {
         return redirect("/")
     }
     const course = await db.course.findUnique({
-        where: {id: params.courseId},
+        where: {id: params.courseId, userId},
         include: {
+            chapters:{
+                orderBy: {position: "asc"},
+            },
             attachments: {
                 orderBy:{ createdAt: "desc"}}}
     });
@@ -33,7 +37,8 @@ const CourseIdPage = async ({params}:{params:{courseId: string}}) => {
         course.description,
         course.imageUrl,
         course.price,
-        course.categoryId
+        course.categoryId,
+        course.chapters.some(chapter => chapter.isPublised)
     ];
     const totalFields = requiredFields.length;
     const completedFields = requiredFields.filter(Boolean).length;
@@ -80,7 +85,10 @@ const CourseIdPage = async ({params}:{params:{courseId: string}}) => {
                             <h2 className="text-xl">Course Chapters</h2>
                         </div>
                         <div>
-                            TODO: Chapters
+                            <ChapterForm 
+                                initialData={course}
+                                courseId={course.id}
+                            />
                         </div>
                     </div>
                     <div>
