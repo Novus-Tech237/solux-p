@@ -13,19 +13,20 @@ import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
-
-interface DescriptionFormProps{
+import { ComboBox } from "@/components/ui/combobox";
+interface CategoryFormProps{
    initialData: Course;
    courseId: string;
+   options: [{label: string, value: string}[]];
 }
 const formSchema = solux.object({
-   description: solux.string().min(1, {message: "Description is required !"})
+    categoryId: solux.string().min(1),
 })
-export const DescriptionForm = ({initialData, courseId}:DescriptionFormProps) => {
+export const CategoryForm = ({initialData, courseId, options, }:CategoryFormProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const toggleEdit = () => setIsEditing((current)=>!current); 
   const router = useRouter();
-   const form = useForm<solux.infer<typeof formSchema>>({resolver: zodResolver(formSchema), defaultValues: {description: initialData?.description || ""},});
+   const form = useForm<solux.infer<typeof formSchema>>({resolver: zodResolver(formSchema), defaultValues: {categoryId: initialData?.categoryId || ""},});
    const { isSubmitting, isValid } = form.formState;
    const onSubmit = async (values: solux.infer<typeof formSchema>) =>{
      try{
@@ -37,18 +38,19 @@ export const DescriptionForm = ({initialData, courseId}:DescriptionFormProps) =>
         toast.error("Something went wrong!")
      }
    }
+   const selectedOption = options.find((option) => option.value === initialData.categoryId)
    return(
        <div className="mt-6 border bg-slate-100 rounded-md p-4">
-        <div className="font-medium flex items-center justify-between">Course Description
+        <div className="font-medium flex items-center justify-between">Course Category
            <Button onClick={toggleEdit} variant="ghost">
               {isEditing ? (<>Cancel</>):(<>
                  <Pencil className="h-4 w-4 mr-2"/>
-                 Edit Description
+                 Edit Category
               </>)}
            </Button>
         </div>
         {!isEditing && (
-           <p className={cn("text-sm mt-2", !initialData.description && "text-slate-500 italic")}>{initialData.description || "Add Course Description"}</p>
+           <p className={cn("text-sm mt-2", !initialData.categoryId && "text-slate-500 italic")}>{selectedOption?.label || "No Category"}</p>
         )}
         {isEditing && (
            <Form {...form}>
@@ -58,26 +60,28 @@ export const DescriptionForm = ({initialData, courseId}:DescriptionFormProps) =>
               >
               <FormField 
                  control={form.control}
-                 name="description"
+                 name="categoryId"
                  render={({field})=>(
                     <FormItem>
                        <FormControl>
-                          <Textarea 
-                             disabled={isSubmitting}
-                             placeholder="e.g 'This course is about...'"
-                             {...field}
-                          />
+                          <ComboBox
+                            options={...options}
+                            {...field}
+                           />
                        </FormControl>
-                       <Button 
-                       disabled={!isValid || isSubmitting}
-                       type="submit"
-                       >Save</Button>
+                       <FormMessage />
                     </FormItem>
                  )}
               />
+              <div className="flex items-center gap-x-2">
+              <Button 
+                       disabled={!isValid || isSubmitting}
+                       type="submit"
+                       >Save</Button>
+              </div>
               </form>
            </Form>
         )}
        </div>
    )
-}
+} 
