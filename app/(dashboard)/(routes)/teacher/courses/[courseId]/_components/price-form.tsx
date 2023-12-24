@@ -51,7 +51,7 @@ export const PriceForm = ({initialData, courseId}:PriceFormProps) => {
                  {!isEditing && initialData.imageUrl &&
                 (<>
                     <Pencil className="h-4 w-4 mr-2"/>
-                    Edit Image
+                    Edit Price
                  </>) }
            </Button>
         </div>
