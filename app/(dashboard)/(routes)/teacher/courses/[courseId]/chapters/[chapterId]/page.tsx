@@ -4,6 +4,8 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import { ArrowLeft, LayoutDashboard } from "lucide-react";
 import { IconBadge } from "@/components/icon-badge";
+import { ChapterTitleForm } from "./_components/chapter-title-form";
+
 const ChapterIdPage = async({params}:{params:{courseId: string, chapterId: string}}) => {
     const { userId } = auth();
     if (!userId) {
@@ -29,7 +31,7 @@ const ChapterIdPage = async({params}:{params:{courseId: string, chapterId: strin
         <div className="p-6">
             <div className="flex items-center justify-between">
                 <div className="w-full">
-                    <Link href={`/teacher/course/${params.courseId}`} className="flex items-center text-sm hover:opacity-75 transition mb-6">
+                    <Link href={`/teacher/courses/${params.courseId}`} className="flex items-center text-sm hover:opacity-75 transition mb-6">
                         <ArrowLeft className="h-4 w-4 mr-2"/>
                         Back to Course Setup
                     </Link>
@@ -48,6 +50,11 @@ const ChapterIdPage = async({params}:{params:{courseId: string, chapterId: strin
                             <IconBadge icon={LayoutDashboard}/>
                             <h2 className="text-xl">Customize your Chapter</h2>
                         </div>
+                        <ChapterTitleForm 
+                            initialData={chapter}
+                            courseId={params.courseId}
+                            chapterId={params.chapterId}
+                        />
                     </div>
                 </div>
             </div>
