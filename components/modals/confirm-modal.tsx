@@ -20,7 +20,17 @@ interface ConfirmModalProps{
 export const ConfirmModal =({children, onConfirm}:ConfirmModalProps)=>{
     return(
         <AlertDialog>
-            <AlertDialogTrigger>{children}</AlertDialogTrigger>
+            <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle>Are You Sure ?</AlertDialogTitle>
+                    <AlertDialogDescription>Deleting a course will be irreversible</AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={onConfirm}>Ok</AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
         </AlertDialog>
     )
 }
