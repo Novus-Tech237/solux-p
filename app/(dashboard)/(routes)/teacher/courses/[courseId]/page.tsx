@@ -10,6 +10,8 @@ import { ImageForm } from "./_components/image-form";
 import { CategoryForm } from "./_components/category-form";
 import { AttachmentForm } from "./_components/attachment-form";
 import { ChapterForm } from "./_components/chapter-form";
+import { Banner } from "@/components/banner";
+import { Actions } from "./_components/actions";
 
 
 const CourseIdPage = async ({params}:{params:{courseId: string}}) => {
@@ -43,14 +45,24 @@ const CourseIdPage = async ({params}:{params:{courseId: string}}) => {
     const totalFields = requiredFields.length;
     const completedFields = requiredFields.filter(Boolean).length;
     const completionText = `(${completedFields}/${totalFields})`
+    const isComplete = requiredFields.every(Boolean)
 
     return ( 
+        <>
+        {!course.isPublished && ( <Banner 
+            label="This Course is Unpublished. It will not be visible to the students."
+        />)}
         <div className="p-6">
             <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-y-2">
                     <h1 className="text-2xl font-medium">Course Setup</h1>
                     <span className="text-sm text-slate-700">Complete all Fields {completionText}</span>
                 </div>
+                <Actions 
+                    disabled={!isComplete}
+                    courseId={params.courseId}
+                    isPublished={course.isPublished}
+                />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
                 <div>
@@ -118,6 +130,8 @@ const CourseIdPage = async ({params}:{params:{courseId: string}}) => {
                 </div>
             </div>
         </div>
+        </>
+        
      );
 }
  

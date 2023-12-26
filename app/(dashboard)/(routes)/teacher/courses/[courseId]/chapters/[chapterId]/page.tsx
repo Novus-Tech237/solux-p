@@ -33,6 +33,7 @@ const ChapterIdPage = async({params}:{params:{courseId: string, chapterId: strin
     const completedFields = requiredFields.filter(Boolean).length
     const completionText = `(${completedFields}/${totalFields})`;
     const isComplete = requiredFields.every(Boolean)
+    const isPublished = chapter.isPublised
     return(
         <>
         {!chapter.isPublised && (
@@ -56,7 +57,8 @@ const ChapterIdPage = async({params}:{params:{courseId: string, chapterId: strin
                         <ChapterActions 
                             disabled={!isComplete}
                             courseId={params.courseId}
-                            chapterId={params.chapterId} isPublished={false}                        />
+                            chapterId={params.chapterId} 
+                            isPublished={isPublished}                        />
                     </div>
                 </div>
             <div className="flex flex-col gap-y-2">
