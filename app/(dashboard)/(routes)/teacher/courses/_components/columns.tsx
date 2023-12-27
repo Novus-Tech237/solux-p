@@ -34,6 +34,11 @@ export const columns: ColumnDef<Course>[] = [
           Price <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
+    },
+    cell: ({ row }) => {
+        const price = parseFloat(row.getValue("price") || "0")
+        const formatted = new Intl.NumberFormat("en-US",{style: "currency", currency: "XAF"}).format(price);
+        return <div>{formatted}</div>
     }
   },
   {
