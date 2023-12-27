@@ -24,7 +24,7 @@ export const ConfirmModal =({children, onConfirm}:ConfirmModalProps)=>{
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Are You Sure ?</AlertDialogTitle>
-                    <AlertDialogDescription>Deleting a course will be irreversible</AlertDialogDescription>
+                    <AlertDialogDescription>This action is Irreversible</AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
