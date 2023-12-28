@@ -1,16 +1,17 @@
 "use client"
 
 import { Category } from "@prisma/client"
-import { FcEngineering, FcGallery, FcFlashAuto, FcCommandLine  } from "react-icons/fc"
+import { FcEngineering, FcGallery, FcFlashOn, FcCommandLine, FcMultipleDevices  } from "react-icons/fc"
+import { IoMdFlash } from  "react-icons/io"
 import { IconType } from "react-icons/"
 import { CategoryItem } from "./category-item";
 interface CategoriesProps{
     items: Category[];
 }
 const iconMap: Record<Category["name"], IconType> = {
-    "Computer Science": FcEngineering,
+    "Computer Science": FcMultipleDevices,
     "Design": FcGallery,
-    "Framwork Development": FcFlashAuto,
+    "Framework Development": FcFlashOn,
     "Programming": FcCommandLine
 }
 export const Categories = ({items}:CategoriesProps) => {
