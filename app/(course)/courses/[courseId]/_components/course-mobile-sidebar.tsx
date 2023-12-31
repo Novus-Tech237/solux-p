@@ -9,9 +9,9 @@ interface CourseMobileSidebarProps{
             userProgress: UserProgress[] | null;
         })[];
     }
-    proressCount: number;
+    progressCount: number;
 }
-export const CourseMobileSidebar = ({course, proressCount}:CourseMobileSidebarProps) => {
+export const CourseMobileSidebar = ({course, progressCount}:CourseMobileSidebarProps) => {
     return (
         <Sheet>
         <SheetTrigger className="md:hidden pr-4 hover:opacity-75 transition">
@@ -20,7 +20,7 @@ export const CourseMobileSidebar = ({course, proressCount}:CourseMobileSidebarPr
         <SheetContent side="left" className="p-0 bg-white w-72">
             <CourseSidebar 
                 course={course}
-                progressCount={proressCount}
+                progressCount={progressCount}
             />
         </SheetContent>
     </Sheet>
