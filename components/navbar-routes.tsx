@@ -12,7 +12,7 @@ export const NavbarRoutes = () => {
 
 
     const isTeacherPage = pathname?.startsWith("/teacher");
-    const isPlayerPage = pathname?.startsWith("/chapter");
+    const isPlayerPage = pathname?.startsWith("/courses");
     const isSearchPage = pathname === "/search";
     return (
         <>
