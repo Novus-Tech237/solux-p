@@ -56,9 +56,9 @@ const CourseIdPage = async ({params}:{params:{courseId: string}}) => {
         <div className="p-6">
             <div className="flex items-center justify-between">
                 <div className="w-full">
-                <Link href={`/teacher/courses/${params.courseId}`} className="flex items-center text-sm hover:opacity-75 transition mb-6">
+                <Link href={`/teacher/courses`} className="flex items-center text-sm hover:opacity-75 transition mb-6">
                         <ArrowLeft className="h-4 w-4 mr-2"/>
-                        Back to Course Setup
+                        Back to Teacher Board
                     </Link>
                 </div>
             </div>
