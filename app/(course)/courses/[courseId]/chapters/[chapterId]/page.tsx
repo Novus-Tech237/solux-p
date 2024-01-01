@@ -2,6 +2,7 @@ import { getChapter } from "@/actions/get-chapter";
 import { Banner } from "@/components/banner";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import { VideoPlayer } from "./_components/video-player";
 
 const ChapterIdPage = async ({params}:{params:{courseId: string; chapterId: string}}) => {
     const { userId } = auth();
@@ -47,7 +48,7 @@ const ChapterIdPage = async ({params}:{params:{courseId: string; chapterId: stri
                         title={chapter.title}
                         courseId={params.courseId}
                         nextChapterId={nextChapter?.id}
-                        playbackId={muxData?.playerId}
+                        playbackId={muxData?.playerId!}
                         isLocked={isLocked}
                         completeOnEnd={completeOnEnd}
                     />
