@@ -52,7 +52,18 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
             }
         })
       }
-      const session = aw
+      const session = await stripe.checkout.sessions.create({
+        customer: stripeCustomer.stripeCustomerId,
+        line_items,
+        mode: 'payment',
+        success_url: `${process.env.NEXT_PUBLIC_APPS_URL}/courses/${course.id}?success=1`,
+        cancel_url: `${process.env.NEXT_PUBLIC_APPS_URL}/courses/${course.id}?canceled=1`,
+        metadata: {
+            courseId: course.id,
+            userId: user.id
+        }
+      })
+      return NextResponse.json({ url: session.url })
     } catch (error) {
       console.log("[COURSE_ID_CHECKOUT]", error);  
       return new NextResponse("Internal Server Error", {status: 500})
