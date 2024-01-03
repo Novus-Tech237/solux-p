@@ -41,6 +41,7 @@ export const ChapterActions = ({disabled, courseId, chapterId, isPublished}:Chap
             toast.success("Chapter deleted successfully")
             router.refresh();
             router.push(`/teacher/courses/${courseId}`)
+            router.refresh();
 
         } catch {
             toast.error("Something went wrong")

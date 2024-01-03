@@ -5,7 +5,7 @@ import { getCourses } from "@/actions/get-courses";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { CoursesList } from "@/components/courses-list";
-
+import { Compass } from "lucide-react";
 interface SearchPageProps {
     searchParams: {
         title: string;
@@ -23,6 +23,10 @@ const SearchPage = async ({searchParams}:SearchPageProps) => {
     const courses = await getCourses({userId, ...searchParams})
     return ( 
         <>
+        <div className="flex flex-row items-center gap-x-2 pt-5 px-6">
+            <Compass className="text-orange-600"/>
+            <h1 className="text-2xl font-bold text-orange-600">Browse</h1>
+        </div>
         <div className="px-6 pt-6 md:hidden md:mb-0 block">
             <SearchInput />
         </div>

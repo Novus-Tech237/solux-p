@@ -20,7 +20,6 @@ interface VideoPlayerProps{
 }
 export const VideoPlayer =({playbackId, courseId, chapterId, nextChapterId, isLocked, completeOnEnd, title}: VideoPlayerProps) => {
     const [isReady, setIsReady] = useState(false)
-    console.log(playbackId)
     return (
         <div className="relative aspect-video">
             {!isReady && !isLocked && (

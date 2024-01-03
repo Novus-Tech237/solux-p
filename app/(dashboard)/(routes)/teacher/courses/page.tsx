@@ -6,7 +6,7 @@ import App from "next/app";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
-
+import { List } from "lucide-react";
 
 
 const CoursesPage = async () => {
@@ -20,7 +20,10 @@ const CoursesPage = async () => {
     })
     return ( 
         <div className="p-6">
-            <h1 className="text-2xl font-bold">Teacher Board</h1>
+            <div className="flex flex-row items-center gap-x-2">
+                <List className="text-orange-600"/>
+                <h1 className="text-2xl font-bold text-orange-600">Courses</h1>
+            </div>
             <DataTable columns={columns} data={courses} />
         </div>
      );
