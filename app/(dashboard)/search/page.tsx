@@ -28,7 +28,7 @@ const SearchPage = async ({searchParams}:SearchPageProps) => {
             <h1 className="text-2xl font-bold text-orange-600">Browse</h1>
         </div>
         <div className="px-6 pt-6 md:hidden md:mb-0 block">
-            <SearchInput />
+            <SearchInput  />
         </div>
         <div className="p-6 space-y-4">
             <Categories 
