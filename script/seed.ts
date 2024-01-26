@@ -10,7 +10,12 @@ async function main() {
                 {name: "Programming"},
                 {name: "Framework Development"},
                 {name: "Design"},
-            ]
+            ],
+            skipDuplicates: true,
+        });
+        await db.category.updateMany({
+            where: { name: "Design" },
+            data: { name: "Graphic Design" },
         });
         console.log("Successfully created category")
     }catch(error){

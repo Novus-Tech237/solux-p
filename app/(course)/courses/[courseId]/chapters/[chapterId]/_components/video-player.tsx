@@ -38,6 +38,7 @@ export const VideoPlayer =({playbackId, courseId, chapterId, nextChapterId, isLo
         router.refresh();
 
         if (nextChapterId) {
+          router.refresh();
           router.push(`/courses/${courseId}/chapters/${nextChapterId}`)
         }
       }

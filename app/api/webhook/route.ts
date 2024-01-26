@@ -18,8 +18,8 @@ export async function POST(req: Request){
         return new NextResponse(`Webhook Error: ${error.message}`, {status: 400})
     }
     const session = event.data.object as Stripe.Checkout.Session
-    const userId = session?.metadata?.userId
-    const courseId = session?.metadata?.courseId
+    const userId = session?.metadata?.userId;
+    const courseId = session?.metadata?.courseId;
     if(event.type === "checkout.session.completed"){
         if(!userId || !courseId){
             return new NextResponse(`Webhook Error: Missing metadata`, {status: 400})

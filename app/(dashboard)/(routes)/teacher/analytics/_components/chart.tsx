@@ -17,7 +17,7 @@ export const Chart = ({
   return (
     <Card>
       <ResponsiveContainer width="100%" height={350}>
-        <BarChart data={data}>
+        <BarChart data={data} barCategoryGap={2}>
           <XAxis
             dataKey="name"
             stroke="#888888"
@@ -30,12 +30,13 @@ export const Chart = ({
             fontSize={12}
             tickLine={false}
             axisLine={false}
-            tickFormatter={(value) => `$${value}`}
+            tickFormatter={(value) => `${value}`}
           />
           <Bar
             dataKey="total"
-            fill="#0369a1"
-            radius={[4, 4, 0, 0]}
+            fill="#f76f07"
+            radius={[0, 0, 0, 0]}
+            barSize={75}
           />
         </BarChart>
       </ResponsiveContainer>

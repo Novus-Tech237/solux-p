@@ -33,7 +33,7 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
                     name: course.title,
                     description: course.description!,
                 },
-                unit_amount: Math.round(course.price! * 100)
+                unit_amount: Math.round(course.price! * 1)
             }
         }
       ];
@@ -56,13 +56,13 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
         customer: stripeCustomer.stripeCustomerId,
         line_items,
         mode: 'payment',
-        success_url: `${process.env.NEXT_PUBLIC_APPS_URL}/courses/${course.id}?success=1`,
-        cancel_url: `${process.env.NEXT_PUBLIC_APPS_URL}/courses/${course.id}?canceled=1`,
+        success_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?success=1`,
+        cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?canceled=1`,
         metadata: {
             courseId: course.id,
             userId: user.id
         }
-      })
+      });
       return NextResponse.json({ url: session.url })
     } catch (error) {
       console.log("[COURSE_ID_CHECKOUT]", error);  

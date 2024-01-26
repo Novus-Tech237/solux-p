@@ -10,7 +10,7 @@ interface CategoriesProps{
 }
 const iconMap: Record<Category["name"], IconType> = {
     "Computer Science": FcMultipleDevices,
-    "Design": FcGallery,
+    "Graphic Design": FcGallery,
     "Framework Development": FcFlashOn,
     "Programming": FcCommandLine
 }
