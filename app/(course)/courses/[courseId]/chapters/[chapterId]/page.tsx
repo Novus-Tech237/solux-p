@@ -85,7 +85,7 @@ const ChapterIdPage = async ({params}:{params:{courseId: string; chapterId: stri
                         <Separator/>
                         <div className="p-4">
                             <p>For a better understanding of the course we propose the guide book of the course</p>
-                            <h1 className="text-2xl font-semibold mb-2">Title: </h1>
+                            <h1 className="text-2xl font-semibold mb-2">Title: x </h1>
                             {attachments.map((attachment)=>(
                                 <a 
                                     href={attachment.url}

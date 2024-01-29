@@ -30,6 +30,7 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
             price_data:{
                 currency: "XAF",
                 product_data: {
+                    images: [course.imageUrl],
                     name: course.title,
                     description: course.description!,
                 },

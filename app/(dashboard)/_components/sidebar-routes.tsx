@@ -2,7 +2,7 @@
 import { usePathname } from "next/navigation";
 import { SidebarItem } from "./sidebar-item";
 import { Compass, Layout, List, BarChart } from "lucide-react";
-import { IoLogoWhatsapp } from "react-icons/io";
+import { IoLogoWhatsapp, IoMdCash } from "react-icons/io";
 
 const guestRoutes = [
     {
@@ -19,7 +19,12 @@ const guestRoutes = [
         icon: IoLogoWhatsapp,
         label: "Community",
         href: "https://whatsapp.com/channel/0029VaBbZhqI7BeNzi1rr41U",
-    }
+    },
+    // {
+    //     icon: IoMdCash,
+    //     label: "Subscription",
+    //     href: "/subscription",
+    // }
 ]
 const teacherRoutes = [
     {

@@ -10,11 +10,15 @@ import { useRouter } from "next/navigation"
 import { Attachment, Course } from "@prisma/client";
 import { FileUpload } from "@/components/file-upload";
 import Image from "next/image"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Form } from "@/components/ui/form";
 interface AttachmentFormProps{
    initialData: Course & {attachments: Attachment[]};
    courseId: string;
 }
 const formSchema = solux.object({
+   title: solux.string().min(1, {message: "Title of Attachment"}),
    url: solux.string().min(1, {message: "Media Required !"})
 }) 
 export const AttachmentForm = ({initialData, courseId}:AttachmentFormProps) => {
@@ -22,6 +26,7 @@ export const AttachmentForm = ({initialData, courseId}:AttachmentFormProps) => {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const toggleEdit = () => setIsEditing((current)=>!current); 
   const router = useRouter();
+  const form = useForm<solux.infer<typeof formSchema>>({resolver: zodResolver(formSchema), defaultValues: initialData,});
    const onSubmit = async (values: solux.infer<typeof formSchema>) =>{
      try{
         await axios.post(`/api/courses/${courseId}/attachments`, values);
@@ -46,7 +51,8 @@ export const AttachmentForm = ({initialData, courseId}:AttachmentFormProps) => {
    }
    return(
        <div className="mt-6 border bg-slate-100 rounded-md p-4">
-        <div className="font-medium flex items-center justify-between">Course Attachements
+        <div className="font-medium flex items-center justify-between">
+            Course Attachements
            <Button onClick={toggleEdit} variant="ghost">
               {isEditing && (<>Cancel</>)}
               {!isEditing  &&
@@ -55,6 +61,7 @@ export const AttachmentForm = ({initialData, courseId}:AttachmentFormProps) => {
                     Add a File
                  </>) }
            </Button>
+       
         </div>
         {!isEditing && (
            <>

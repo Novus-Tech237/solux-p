@@ -135,6 +135,7 @@ const CourseIdPage = async ({params}:{params:{courseId: string}}) => {
                             initialData={course}
                             courseId={course.id}
                         />
+                        
                     </div>
                 </div>
             </div>
