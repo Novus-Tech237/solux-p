@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 
-export async function POST(req: Request, { params }: { params: { courseId: string}}){
+export async function POST(req: Request, { params, couponCode }: { params: { courseId: string }, couponCode: string }) {
     try {
       const user = await currentUser();
       if(!user || !user.id || !user.emailAddresses?.[0]?.emailAddress){
@@ -24,6 +24,7 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
       if(purchase){
         return new NextResponse("Purchased", { status: 400})
       }
+  
       const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] =[
         {
             quantity: 1,
@@ -38,6 +39,7 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
             }
         }
       ];
+
       let stripeCustomer = await db.stripeCustomer.findUnique({
         where:{userId: user.id},
         select:{stripeCustomerId: true}
@@ -53,6 +55,16 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
             }
         })
       }
+    let discounts: Stripe.Checkout.SessionCreateParams.Discount[] = [];
+    if (couponCode) {
+      const coupon = await stripe.coupons.create({
+        name: couponCode,
+        percent_off: 25,
+        duration: 'once',
+      });
+      discounts = [{ coupon: coupon.id }];
+    }
+
       const session = await stripe.checkout.sessions.create({
         customer: stripeCustomer.stripeCustomerId,
         line_items,
@@ -62,7 +74,8 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
         metadata: {
             courseId: course.id,
             userId: user.id
-        }
+        },
+        discounts,
       });
       return NextResponse.json({ url: session.url })
     } catch (error) {

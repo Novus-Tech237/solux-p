@@ -8,8 +8,8 @@ interface CourseProgressProps{
     size?: "default" | "sm"
 }
 const colorByVariant = {
-    default: "text-orange-700",
-    success: "text-emerald-700"
+    default: "text-slate-500",
+    success: "text-orange-700"
 }
 const sizeByVariant = {
     default: "text-sm",

@@ -8,6 +8,8 @@ import { Separator } from "@/components/ui/separator";
 import { Preview } from "@/components/preview";
 import { File } from "lucide-react";
 import { CourseProgressButton } from "./_components/course-progress-button";
+import { CouponCourse } from "./_components/coupon-course";
+
 
 const ChapterIdPage = async ({params}:{params:{courseId: string; chapterId: string}}) => {
     const { userId } = auth();
@@ -58,7 +60,7 @@ const ChapterIdPage = async ({params}:{params:{courseId: string; chapterId: stri
                         completeOnEnd={completeOnEnd}
                     />
                 </div>
-                <div className="p-4 flex flex-col md:flex-row items-center justify-between">
+                <div className="p-4 flex flex-col md:flex-row items-center justify-evenly">
                     <h2 className="text-2xl font-semibold mb-2">
                         {chapter.title}
                     </h2>
@@ -70,10 +72,12 @@ const ChapterIdPage = async ({params}:{params:{courseId: string; chapterId: stri
                         isCompleted={!!userProgress?.isCompleted}
                       />
                     ):(
-                        <CourseEnrollButton 
-                            courseId={params.courseId}
-                            price={course.price!}
-                        />
+                        <>
+                        <CourseEnrollButton
+                                courseId={params.courseId}
+                                price={course.price!} />
+                        {/* <CouponCourse/> */}
+                        </>
                     )}
                 </div>
                 <Separator />

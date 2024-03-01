@@ -9,6 +9,7 @@ export const Sidebar = () => {
             <div className='flex flex-col '>
                 <SidebarRoutes/>
             </div>
+            
         </div>
     )
 }

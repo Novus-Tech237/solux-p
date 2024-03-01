@@ -21,9 +21,9 @@ export const SearchInput = () =>{
         router.push(url)
     },[debouncedValue, currentCategoryId, router, pathname])
     return (
-        <div className="relative -z-10">
+        <div className="flex items-center gap-x-2">
             <Search 
-            className="h-4 w-4 absolute top-3 left-3 text-slate-600"/>
+            className="h-4 w-4 text-slate-600"/>
             <Input 
             onChange={(e)=>setValue(e.target.value)}
             value={value}

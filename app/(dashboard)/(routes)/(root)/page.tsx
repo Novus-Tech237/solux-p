@@ -6,8 +6,7 @@ import { getDashboardCourses } from "@/actions/get-dashboard-courses";
 import { CoursesList } from "@/components/courses-list";
 
 import { InfoCard } from "./_components/info-card";
-import { IoMdCash } from "react-icons/io";
-import { IconBadge } from "@/components/icon-badge";
+
 
 export default async function Dashboard() {
   const { userId } = auth();
@@ -39,19 +38,7 @@ export default async function Dashboard() {
           numberOfItems={completedCourses.length}
           variant="success"
        />
-      {/* <div className="border rounded-md flex items-center gap-x-2 p-3">
-        <IconBadge
-          icon={IoMdCash}
-          variant="default"
-        />
-        <p className="font-medium">
-          Subscription Status/ TimeOut
-        </p>
-        <p className="text-gray-500 text-sm">
-          Developer Pack
-        </p>
-
-      </div> */}
+    
       </div>
       <CoursesList
         items={[...coursesInProgress, ...completedCourses]}

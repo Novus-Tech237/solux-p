@@ -4,14 +4,20 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db"
 import { CourseSidebarItem } from "./course-sidebar-item";
 import { CourseProgress } from "@/components/course-progress";
+import { Button } from "@/components/ui/button";
+import { checkSubscription } from "@/lib/subscription";
+import { FaRobot } from 'react-icons/fa'
+import Link from "next/link";
 interface CourseSidebarProps{
     course: Course & {
         chapters: (Chapter & {userProgress: UserProgress[] | null;})[]
     }
     progressCount: number;
+
 }
 
 export const CourseSidebar = async ({course, progressCount}:CourseSidebarProps) =>{
+    const isPro = await checkSubscription();
     const { userId } = auth();
     if(!userId) {
         return redirect("/")
@@ -35,6 +41,17 @@ export const CourseSidebar = async ({course, progressCount}:CourseSidebarProps) 
                             variant="success"
                             value={progressCount}
                         />
+                    </div>
+                )}
+                {isPro && purchase && (
+                    <div className="mt-10 justify-center items-center flex gap-x-2">
+                        <Link href={`/courses/${course.id}/ana/chat`}>
+                            <Button className="bg-orange-600 hover:bg-orange-400">
+                                Ask ANA
+                                <FaRobot size={21} className="ml-2"/>
+                            </Button>
+                        </Link>
+                        
                     </div>
                 )}
             </div>

@@ -1,5 +1,6 @@
 import { Sidebar } from "./_components/sidebar";
 import { NavBar } from "./_components/navbar";
+import { Separator } from "@/components/ui/separator";
 const DashboardLayout = ({children}:{children:React.ReactNode}) => {
     return ( 
         <div className="h-full">
@@ -12,7 +13,6 @@ const DashboardLayout = ({children}:{children:React.ReactNode}) => {
             <main className="md:pl-56 h-full pt-[80px]">
                  {children}
             </main>
-            
         </div>
     );
 }
