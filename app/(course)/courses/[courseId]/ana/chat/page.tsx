@@ -2,43 +2,35 @@
 
 import { ChatForm } from "@/components/chat-form";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, FormEvent, useState } from "react";
 import { FaRobot } from "react-icons/fa";
-import { IoMdCash } from "react-icons/io";
 import  { Ana, Message } from "@prisma/client"
-import { useCompletion } from "ai/react";
 import { MessageForm } from "@/components/message-form";
-import { ChatRequestOptions } from "ai";
 import { AnaChatMessageProps } from "@/components/chat-message";
+import { useCompletion } from "ai/react";
+import { FormEvent, useState, useEffect } from "react";
+import axios from "axios";
 
-interface AnaChatProps {
-    ana: Ana & {
-        messages: Message[];
-    }
-}
-const AnaChatPage = ({ ana }:AnaChatProps) => {
-    const router = useRouter()
-    const [messages, setMessages] = useState<AnaChatMessageProps[]>(ana?.messages || [])
-    const {input, isLoading, handleInputChange, handleSubmit, setInput} = useCompletion({
-        api: `/api/anachat`,
-        onFinish(prompt, completion){
-            const systemMessage: AnaChatMessageProps = {
-                role: "system",
-                content: completion,
-            };
-            setMessages((current)=>[...current, systemMessage]);
-            setInput("");
-            router.refresh();
-        }
-    });
-    const onSubmit = (e: FormEvent<HTMLFormElement>)=>{
-        const userMessage: AnaChatMessageProps = {
-            role: "user",
-            content: input,
-        };
-        setMessages((current)=>[...current, userMessage]);
-        handleSubmit(e)
-    } 
+const AnaClientPage = () => {
+  const [inputValue, setInputValue] = useState('');
+  const [chatLog, setChatLog] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    setChatLog((prevChatLog) => [...prevChatLog, { type: 'user', message: inputValue }])
+
+    sendMessage(inputValue);
+    
+    setInputValue('');
+  }
+  const sendMessage = (message) => {
+    const url = '/api/chat';
+
+    const data = {
+      model: "gpt-3.5-turbo-0301",
+      messages: [{ "role": "user", "content": message }]
+    };
+    
   return (
     <>
     <div className="flex flex-col h-full space-y-2 p-4">
@@ -77,4 +69,4 @@ const AnaChatPage = ({ ana }:AnaChatProps) => {
   );
 }
 
-export default AnaChatPage;
+export default AnaClientPage;

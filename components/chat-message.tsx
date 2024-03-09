@@ -31,7 +31,6 @@ const AnaChatMessage = ({role, content, isLoading}: AnaChatMessageProps) => {
                 {isLoading ? <BeatLoader color={"black"} size={5}/> : content}
             </div>
             {role === "user" && <UserAvatar/>}
-
             {role !== "user" && !isLoading && (
                 <Button
                     onClick={onCopy}
