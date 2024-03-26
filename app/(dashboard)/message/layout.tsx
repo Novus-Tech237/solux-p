@@ -6,9 +6,9 @@ export default async function MessageLayout({children}:{children: React.ReactNod
     <Sidebar>
     <div className="h-full">
       <ConversationList 
-        // users={users} 
-        title="Messages" 
-        // initialItems={conversations}
+            // users={users} 
+            title="Messages" 
+            initialItems={[]} users={[]}        // initialItems={conversations}
       />
       {children}
     </div>

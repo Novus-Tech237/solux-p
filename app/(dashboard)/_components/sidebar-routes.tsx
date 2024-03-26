@@ -1,8 +1,10 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { SidebarItem } from "./sidebar-item";
-import { Compass, Layout, List, BarChart, MessageCircle } from "lucide-react";
+import { Compass, Layout, List, BarChart, MessageCircle, User } from "lucide-react";
 import { IoLogoWhatsapp, IoMdCash } from "react-icons/io";
+import { FaDesktop } from 'react-icons/fa';
+import { UserProfile } from "@clerk/nextjs";
 
 const guestRoutes = [
     {
@@ -31,6 +33,8 @@ const guestRoutes = [
         href: "https://whatsapp.com/channel/0029VaBbZhqI7BeNzi1rr41U",
     },
 ]
+
+// ToDo: Super Admin Routes 
 const teacherRoutes = [
     {
         icon: List,
@@ -41,7 +45,17 @@ const teacherRoutes = [
         icon: BarChart,
         label: "Analytics",
         href: "/teacher/analytics",
-    }
+    }, 
+    {
+        icon: User,
+        label: "Teachers",
+        href: "/teacher/teachers",
+    },
+    {
+        icon: FaDesktop,
+        label: "Conference",
+        href: "/teacher/classes",
+    }  
 ]
 export const SidebarRoutes = () => {
     const pathname = usePathname();

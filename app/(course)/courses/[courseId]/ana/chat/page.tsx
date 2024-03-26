@@ -30,7 +30,7 @@ const AnaClientPage = () => {
       model: "gpt-3.5-turbo-0301",
       messages: [{ "role": "user", "content": message }]
     };
-    
+  }
   return (
     <>
     <div className="flex flex-col h-full space-y-2 p-4">
@@ -49,7 +49,7 @@ const AnaClientPage = () => {
       
       <MessageForm
                   isLoading={isLoading}
-                  messages={messages} ana={{
+                  messages={onmessage} ana={{
                       id: "",
                       userId: "",
                       seed: ""
@@ -67,6 +67,7 @@ const AnaClientPage = () => {
       </>
 
   );
+
 }
 
 export default AnaClientPage;

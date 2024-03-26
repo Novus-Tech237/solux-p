@@ -1,5 +1,6 @@
 import { checkSubscription } from "@/lib/subscription";
 import { IoMdCash } from "react-icons/io";
+import SubscriptionButton from "./_components/subscription-button";
 
 const SubscriptionPage = async () => {
   const isPro = await checkSubscription();
@@ -22,6 +23,7 @@ const SubscriptionPage = async () => {
               <span className="font-bold">Free</span> Plan
             </p>
           )}
+          <SubscriptionButton isPro={isPro}/>
         </div>
       </div>
     </>
